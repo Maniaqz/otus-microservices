@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minimal-deployment
+  labels:
+    app: minimal-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: minimal-app
+  template:
+    metadata:
+      labels:
+        app: minimal-app
+    spec:
+        containers:
+            - name: minimal-app-container
+              image: maniaqz/otus:minimal-app
+              ports:
+                - containerPort: 8000
+              livenessProbe:
+                httpGet:
+                  path: /health
+                  port: 8000
+                initialDelaySeconds: 10
+                periodSeconds: 15
