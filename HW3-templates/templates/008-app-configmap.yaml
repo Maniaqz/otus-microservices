@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: users-app-config
+data:
+  spring.datasource.url: "jdbc:postgresql://postgres:5432/otus-users"
+  spring.datasource.driver-class-name: "org.postgresql.Driver"
+  server.port: "8000"

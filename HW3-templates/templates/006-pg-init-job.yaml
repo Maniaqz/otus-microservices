@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-users-table
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: postgres-client
+          image: postgres:latest
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              export PGPASSWORD=$POSTGRES_PASSWORD
+              until pg_isready -h postgres -U $POSTGRES_USER -d otus-users; do
+                echo "Waiting for PostgreSQL to be available..."
+                sleep 5
+              done
+              psql -h postgres -U $POSTGRES_USER -d otus-users < /path/to/configmap/create_users_table.sql
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+          volumeMounts:
+            - name: sql-scripts
+              mountPath: /path/to/configmap/
+      volumes:
+        - name: sql-scripts
+          configMap:
+            name: sql-scripts-configmap
+  backoffLimit: 4

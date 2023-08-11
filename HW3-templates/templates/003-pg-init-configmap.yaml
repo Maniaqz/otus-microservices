@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sql-scripts-configmap
+data:
+  create_users_table.sql: |
+    CREATE TABLE IF NOT EXISTS public.users
+    (
+        id serial PRIMARY KEY,
+        login character varying(255) NOT NULL,
+        email character varying(255) NOT NULL,
+        password character varying(255) NOT NULL
+    );
