@@ -1,0 +1,523 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 3,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.5, sum by(le) (rate(http_server_requests_seconds_bucket{job=\"users-app\", method=\"GET\", status=\"200\"}[5m])))",
+          "instant": false,
+          "legendFormat": "GET 200",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "histogram_quantile(0.5, sum by(le) (rate(http_server_requests_seconds_bucket{job=\"users-app\", method=\"GET\", status=\"404\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET 404",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.5, sum by(le) (rate(http_server_requests_seconds_bucket{job=\"users-app\", method=\"GET\", status=\"409\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET 409",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.5, sum by(le) (rate(http_server_requests_seconds_bucket{job=\"users-app\", method=\"GET\", status=\"502\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET 502",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.5, sum by(le) (rate(http_server_requests_seconds_bucket{job=\"users-app\", method=\"GET\", status=\"503\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET 503",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.5, sum by(le) (rate(http_server_requests_seconds_bucket{job=\"users-app\", method=\"POST\", status=\"200\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "POST 200",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.5, sum by(le) (rate(http_server_requests_seconds_bucket{job=\"users-app\", method=\"PUT\", status=\"200\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "PUT 200",
+          "range": true,
+          "refId": "G"
+        }
+      ],
+      "title": "Ingress Latency 0.5",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"GET\", status=\"200\"}[5m]))",
+          "instant": false,
+          "legendFormat": "GET 200",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"GET\", status=\"404\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET 404",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"GET\", status=\"409\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET 409",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"GET\", status=\"502\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET 502",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"GET\", status=\"503\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET 503",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"POST\", status=\"200\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "POST 200",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"PUT\", status=\"200\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "PUT 200",
+          "range": true,
+          "refId": "G"
+        }
+      ],
+      "title": "Ingress RPS",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"POST\", status=\"500\"}[5m]))",
+          "instant": false,
+          "legendFormat": "POST /users",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"GET\", status=\"500\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "GET /users/{id}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"PUT\", status=\"500\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "PUT /users/{id}",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bc61c6c1-ee65-4e8c-a8f1-06b6485a2d03"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"users-app\", method=\"DELETE\", status=\"500\"}[5m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "DELETE /users/{id}",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "title": "API Error rate",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Ingress dashboard",
+  "uid": "a5803cd1-53dd-4495-9e00-d459471faae6",
+  "version": 4,
+  "weekStart": ""
+}
